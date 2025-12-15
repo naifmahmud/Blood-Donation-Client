@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../RootLayout/RootLayout";
 import Home from "../Pages/Home/Home";
+import BloodRequests from "../Pages/Blood Request/BloodRequests";
+import Funding from "../Pages/Funding/Funding";
 
 export const router= createBrowserRouter([
     {
@@ -10,6 +12,14 @@ export const router= createBrowserRouter([
             {
                 index:true,
                 Component:Home
+            },
+            {
+                path:"/bloodRequests",
+                Component:BloodRequests
+            },
+            {
+                path:"/funding",
+                element:<Funding></Funding>
             }
         ]
     }

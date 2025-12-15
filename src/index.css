@@ -3,3 +3,9 @@
  @plugin "daisyui" {
    themes: light --default;
  }
+
+
+
+.navbar a:active{
+  color: red;
+}
