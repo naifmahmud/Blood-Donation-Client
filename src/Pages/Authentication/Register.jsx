@@ -47,6 +47,10 @@ const Register = () => {
         }
     )
     const photo_URL=response.data.data.display_url;
+
+    const formData= {
+        name,email,password,photo_URL
+    }
     
     
     createUserWithEmail(email, password)
@@ -59,6 +63,12 @@ const Register = () => {
             photoURL: photo_URL,
         }).then(()=>{
             setUser(result.user)
+            axios.post('http://localhost:3000/users',formData).then(res=> {
+                console.log(res.data);
+                
+            }).catch(err=>{
+                console.log(err.message);
+            })
         })
         navigate("/");
       })
