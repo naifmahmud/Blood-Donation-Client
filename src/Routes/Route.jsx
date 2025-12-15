@@ -3,6 +3,8 @@ import RootLayout from "../RootLayout/RootLayout";
 import Home from "../Pages/Home/Home";
 import BloodRequests from "../Pages/Blood Request/BloodRequests";
 import Funding from "../Pages/Funding/Funding";
+import Register from "../Pages/Authentication/Register";
+import login from "../Pages/Authentication/login";
 
 export const router= createBrowserRouter([
     {
@@ -12,6 +14,14 @@ export const router= createBrowserRouter([
             {
                 index:true,
                 Component:Home
+            },
+            {
+                path:"/register",
+                Component:Register
+            },
+            {
+                path:"/login",
+                Component:login
             },
             {
                 path:"/bloodRequests",
