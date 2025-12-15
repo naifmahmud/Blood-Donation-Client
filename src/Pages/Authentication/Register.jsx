@@ -1,5 +1,5 @@
-import React, { use, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router";
+import React, { use, useEffect, useState } from "react";
+import { data, NavLink, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -7,26 +7,44 @@ import { updateProfile } from "firebase/auth";
 import axios from "axios";
 
 const Register = () => {
-  const { createUserWithEmail,setUser } = use(AuthContext);
+
+  const [districts,setDistricts]=useState([]);
+  
+  // useEffect(()=>{
+  //   fetch('/districts.json')
+  // .then(res=> res.json())
+  // .then(data=> {
+  //   const result= data[2].data;
+  //   setDistricts(result)
+  // })
+  // },[districts])
+  // console.log(districts);
+  
+  const { createUserWithEmail, setUser } = use(AuthContext);
 
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
+  const [bloodGroup,setBloodGroup]= useState('');
+  const [district,setDistrict]= useState('');
+  const [upazila,setUpazila]= useState('');
 
   const location = useLocation();
   const navigate = useNavigate();
   console.log(location);
 
-  const handleRegister =async(e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     const name = e.target.name.value;
     const email = e.target.email.value;
     const photo = e.target.photo;
-    const file= photo.files[0];
+    const file = photo.files[0];
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
-    
 
+    // console.log(bloodGroup);
+
+    
     if (password !== confirmPassword) {
       return toast.error("Password not matched❌");
     }
@@ -38,21 +56,27 @@ const Register = () => {
       );
     }
 
-// send photo to imbb
-    const response=await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_YOUR_CLIENT_API_KEY}`,{image:file},
-        {
-            headers:{
-                'Content-Type':'multipart/form-data'
-            }
-        }
-    )
-    const photo_URL=response.data.data.display_url;
+    // send photo to imbb
+    const response = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_YOUR_CLIENT_API_KEY
+      }`,
+      { image: file },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    const photo_URL = response.data.data.display_url;
 
-    const formData= {
-        name,email,password,photo_URL
-    }
-    
-    
+    const formData = {
+      name,
+      email,
+      password,
+      photo_URL,
+    };
+
     createUserWithEmail(email, password)
       .then((result) => {
         const currenUser = result.user;
@@ -60,20 +84,21 @@ const Register = () => {
 
         updateProfile(currenUser, {
           displayName: name,
-            photoURL: photo_URL,
-        }).then(()=>{
-            setUser(result.user)
-            axios.post('http://localhost:3000/users',formData)
-            .then(res=> {
-                console.log(res.data);
+          photoURL: photo_URL,
+        }).then(() => {
+          setUser(result.user);
+          axios
+            .post("http://localhost:3000/users", formData)
+            .then((res) => {
+              console.log(res.data);
             })
-            .catch(err=>{
-                console.log(err.message);
-            })
-        })
+            .catch((err) => {
+              console.log(err.message);
+            });
+        });
         navigate("/");
       })
-      
+
       .catch((error) => {
         toast.error(error.message);
       });
@@ -112,14 +137,17 @@ const Register = () => {
                 <label className="label">Photo</label>
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">select a Photo</legend>
-                  <input type="file" className="file-input"
-                  name="photo" />
+                  <input type="file" className="file-input" name="photo" />
                 </fieldset>
 
                 {/* Blood */}
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">Blood Group</legend>
-                  <select defaultValue="Pick a browser" className="select">
+                  <select value={bloodGroup} 
+                  onChange={(e)=>setBloodGroup(e.target.value)}
+                  className="select"
+                  required
+                  >
                     <option disabled={true}>Select a Blood Group</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
@@ -135,7 +163,11 @@ const Register = () => {
                 {/* Districts */}
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">District</legend>
-                  <select defaultValue="Pick a browser" className="select">
+                  <select  
+                  className="select"
+                  value={district} 
+                  onChange={(e)=>setDistrict(e.target.value)}
+                  >
                     <option disabled={true}>Select a District</option>
                     <option>Dhaka</option>
                   </select>
@@ -144,7 +176,10 @@ const Register = () => {
                 {/* Upazillas */}
                 <fieldset className="fieldset">
                   <legend className="fieldset-legend">Upazila</legend>
-                  <select defaultValue="Pick a browser" className="select">
+                  <select  
+                  className="select"
+                  value={upazila}
+                  onChange={(e)=>setUpazila(e.target.value)}>
                     <option disabled={true}>Select a Upazila</option>
                     <option>Khilkhet</option>
                   </select>
