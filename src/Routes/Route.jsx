@@ -5,6 +5,9 @@ import BloodRequests from "../Pages/Blood Request/BloodRequests";
 import Funding from "../Pages/Funding/Funding";
 import Register from "../Pages/Authentication/Register";
 import login from "../Pages/Authentication/login";
+import DashboardLayout from "../DashboardLayout/DashboardLayout";
+import MainDashBoard from "../Pages/Dashboard/MainDashBoard/MainDashBoard";
+import CreateRequest from "../Pages/Dashboard/CreateDonationRequest/CreateRequest";
 
 export const router= createBrowserRouter([
     {
@@ -32,5 +35,19 @@ export const router= createBrowserRouter([
                 element:<Funding></Funding>
             }
         ]
+    },
+    {
+        path:'dashboard',
+        element:<DashboardLayout></DashboardLayout>,
+        children:[
+            {index:true,
+                element:<MainDashBoard></MainDashBoard>
+            },
+            {
+                path:'dashboard/createRequest',
+                element:<CreateRequest></CreateRequest>
+            }
+        ]
+
     }
 ])

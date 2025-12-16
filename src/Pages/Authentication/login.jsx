@@ -39,7 +39,7 @@ const handleLogin=(e)=>{
       <div className="hero my-20 ">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center">
-            <h1 className="text-5xl font-bold">Register now!</h1>
+            <h1 className="text-5xl font-bold">Login now!</h1>
           </div>
           <div className="card bg-[#cc7272] w-full max-w-sm shrink-0 shadow-2xl">
             <div className="card-body  rounded-2xl">
@@ -73,13 +73,16 @@ const handleLogin=(e)=>{
                                       {showPass ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
                                     </p>
                                   </div>
+                                  <div>
+                  <a className="label link link-hover">Forgot password?</a>
+                </div>
 
 
                   <button className="btn mt-4">Login</button>
                 </fieldset>
               </form>
               <div className="flex justify-around items-center">
-              <p className="label font-bold">New here</p>
+              <p className="label font-bold">New here register here!!</p>
               <NavLink className="btn" to="/register">
                 Register
               </NavLink>
