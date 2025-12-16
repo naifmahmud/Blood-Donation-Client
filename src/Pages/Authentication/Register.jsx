@@ -1,5 +1,5 @@
-import React, { use, useEffect, useState } from "react";
-import { data, NavLink, useLocation, useNavigate } from "react-router";
+import React, { use, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Register = () => {
 
-  const [districts,setDistricts]=useState([]);
+  // const [districts,setDistricts]=useState([]);
   
   // useEffect(()=>{
   //   fetch('/districts.json')
@@ -88,7 +88,7 @@ const Register = () => {
         }).then(() => {
           setUser(result.user);
           axios
-            .post("http://localhost:3000/users", formData)
+            .post("http://localhost:5000/users", formData)
             .then((res) => {
               console.log(res.data);
             })

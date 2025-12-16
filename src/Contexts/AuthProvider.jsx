@@ -10,7 +10,7 @@ const AuthProvider = ({children}) => {
 
     const [user,setUser]=useState([]);
     const [loading,setLoading]=useState(true);
-    const [role,setRole]= useState('');
+    const [role,setRole]= useState([]);
 
 
     const createUserWithEmail=(email,password)=>{
@@ -29,8 +29,6 @@ const AuthProvider = ({children}) => {
     }
     
 
- 
-
 
     useEffect(()=>{
         const unsubscribe= onAuthStateChanged(auth,(currenUser)=>{
@@ -46,14 +44,16 @@ const AuthProvider = ({children}) => {
        useEffect(()=>{
        if(!user) return;
 
-        axios.get(`http://localhost:3000/users/role/${user.email}`)
+        axios.get(`http://localhost:5000/users/role/${user.email}`)
             .then(res=> {
-                setRole(res.data.role)
+                setRole(res.data.role);
                 setLoading(false)
             })
     },[user])
-    
+
     console.log(role);
+    
+    
     
 
     const userInfo={

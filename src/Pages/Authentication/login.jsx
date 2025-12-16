@@ -13,7 +13,6 @@ const Login = () => {
 
      const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
 
 
 const handleLogin=(e)=>{
@@ -22,7 +21,6 @@ const handleLogin=(e)=>{
   const email= e.target.email.value;
   const password= e.target.password.value;
 
-  console.log(email,password);
 
   signInWithEmail(email,password)
   .then(result=>{
