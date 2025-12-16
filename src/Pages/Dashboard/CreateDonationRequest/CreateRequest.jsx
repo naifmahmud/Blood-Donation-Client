@@ -1,10 +1,13 @@
 
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../../../Contexts/AuthContext";
+import useAxios from "../../../hooks/useAxios";
+import { toast } from "react-toastify";
 
 const CreateRequest = () => {
     const {user}=use(AuthContext);
-    console.log(user);
+
+    const axiosInstance=useAxios();
     
 
   const [districts, setDistricts] = useState([]);
@@ -35,15 +38,15 @@ const CreateRequest = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const name = user.displayName;
-    const email = user.email;
+    const requester_name = user.displayName;
+    const requester_email = user.email;
     const recipientName= e.target.recipient.value;
     const hospital_name= e.target.hospital.value;
     const address= e.target.address.value;
 
     const formData = {
-      name,
-      email,
+      requester_name,
+      requester_email,
       recipientName,
       hospital_name,
       address,
@@ -52,7 +55,15 @@ const CreateRequest = () => {
       upazila,
     };
 
-    console.log(formData);
+    axiosInstance.post('/requests',formData)
+    .then(result=>{
+        console.log({success:true,result})        
+    })
+    .catch(err=>{
+        toast.error(err.message)
+    })
+
+    e.target.reset();
 }
 
   return (
@@ -60,7 +71,7 @@ const CreateRequest = () => {
       <div className="card-body rounded-2xl ">
         <form onSubmit={handleRegister}>
           <fieldset className="fieldset">
-            <label className="label">Requester Name</label>
+            <label className="label">Recipient Name</label>
             <input
               type="text"
               name="recipient"
@@ -87,14 +98,14 @@ const CreateRequest = () => {
 
             {/* Blood */}
             <fieldset className="fieldset">
-              <legend className="fieldset-legend">Blood Group</legend>
+              <legend className="label">Blood Group</legend>
               <select
                 value={bloodGroup}
                 onChange={(e) => setBloodGroup(e.target.value)}
                 className="select w-full"
                 required
               >
-                <option disabled={true}>Select a Blood Group</option>
+                <option value={''}>Select a Blood Group</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
                 <option value="B+">B+</option>
@@ -108,13 +119,14 @@ const CreateRequest = () => {
 
             {/* Districts */}
             <fieldset className="fieldset">
-              <legend className="fieldset-legend">District</legend>
+              <legend className="label">District</legend>
               <select
                 className="select w-full"
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
+                required
               >
-                <option disabled={true}>Select a District</option>
+                <option value={''}>Select a District</option>
                 {districts.map((dist) => {
                   return (
                     <option key={dist.id} value={dist.name}>
@@ -127,13 +139,14 @@ const CreateRequest = () => {
 
             {/* Upazillas */}
             <fieldset className="fieldset">
-              <legend className="fieldset-legend">Upazila</legend>
+              <legend className="label">Upazila</legend>
               <select
                 className="select w-full"
                 value={upazila}
                 onChange={(e) => setUpazila(e.target.value)}
+                required
               >
-                <option disabled={true}>Select a Upazila</option>
+                <option value={''}>Select a Upazila</option>
                 {upazilas.map((upazil) => {
                   return (
                     <option key={upazil.id} value={upazil.name}>
@@ -145,7 +158,7 @@ const CreateRequest = () => {
 
             </fieldset>
 
-            <textarea name="details" rows={5} cols={10} className="bg-white rounded-xl p-2" placeholder="Write why you need blood"></textarea>
+            <textarea name="details" rows={5} cols={10} className="bg-white rounded-xl p-2" placeholder="Write why you need blood" required></textarea>
 
             <button className="btn mt-4">Request</button>
           </fieldset>
