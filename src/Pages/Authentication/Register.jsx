@@ -1,5 +1,5 @@
-import React, { use, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router";
+import React, { use, useEffect, useState } from "react";
+import {NavLink, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Contexts/AuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -8,17 +8,26 @@ import axios from "axios";
 
 const Register = () => {
 
-  // const [districts,setDistricts]=useState([]);
+  const [districts,setDistricts]=useState([]);
+  const [upazilas,setUpazilas]=useState([]);
   
-  // useEffect(()=>{
-  //   fetch('/districts.json')
-  // .then(res=> res.json())
-  // .then(data=> {
-  //   const result= data[2].data;
-  //   setDistricts(result)
-  // })
-  // },[districts])
-  // console.log(districts);
+  useEffect(()=>{
+    fetch('/districts.json')
+  .then(res=> res.json())
+  .then(data=> {
+    const result= data[2].data;
+    setDistricts(result)
+  })
+  },[])
+
+  useEffect(()=>{
+    fetch('/upazilas.json')
+    .then(res=> res.json())
+    .then(data=> {
+      const result= data[2].data;
+      setUpazilas(result);
+    })
+  },[])
   
   const { createUserWithEmail, setUser } = use(AuthContext);
 
@@ -41,9 +50,6 @@ const Register = () => {
     const file = photo.files[0];
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
-
-    // console.log(bloodGroup);
-
     
     if (password !== confirmPassword) {
       return toast.error("Password not matched❌");
@@ -75,6 +81,9 @@ const Register = () => {
       email,
       password,
       photo_URL,
+      bloodgroup:bloodGroup,
+      district,
+      upazila
     };
 
     createUserWithEmail(email, password)
@@ -169,7 +178,14 @@ const Register = () => {
                   onChange={(e)=>setDistrict(e.target.value)}
                   >
                     <option disabled={true}>Select a District</option>
-                    <option>Dhaka</option>
+                    {
+                      districts.map(dist=>{
+
+                        return(
+                          <option key={dist.id} value={dist.name}>{dist.name}</option>
+                        );
+                      })
+                    }
                   </select>
                 </fieldset>
 
@@ -181,7 +197,21 @@ const Register = () => {
                   value={upazila}
                   onChange={(e)=>setUpazila(e.target.value)}>
                     <option disabled={true}>Select a Upazila</option>
-                    <option>Khilkhet</option>
+                    {
+                      upazilas.map(upazil=>{
+                        return(
+                          <option 
+                          key={upazil.id}
+                           value={upazil.name}
+                          >
+                            {upazil.name}
+
+                          </option>
+                        )
+                        
+                      })
+                    }
+                    
                   </select>
                 </fieldset>
 

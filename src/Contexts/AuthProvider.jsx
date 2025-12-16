@@ -51,7 +51,7 @@ const AuthProvider = ({children}) => {
             })
     },[user])
 
-    console.log(role);
+    // console.log(role);
     
     
     
@@ -63,7 +63,8 @@ const AuthProvider = ({children}) => {
         user,
         setUser,
         loading,
-        setLoading
+        setLoading,
+        role
     }
     return (
         <AuthContext value={userInfo}>
