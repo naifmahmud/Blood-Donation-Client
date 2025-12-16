@@ -3,14 +3,14 @@ import { NavLink } from "react-router";
 
 const Aside = () => {
   return (
-    <aside className="w-64 min-h-screen bg-base-300 border-r p-4 flex flex-col">
-      <h2 className="text-xl font-bold mb-6 text-red-600">Blood Donation</h2>
+    <aside className="w-64 min-h-screen bg-green-200 p-4 flex flex-col">
+      <h2 className="text-xl font-bold mb-6"><p>Blood<span className='text-red-500'>Bank</span>BD</p></h2>
 
-      <nav className="space-y-2  flex-1 navlink">
-        <ul className="space-y-5 list-none">
+      <nav className="space-y-2  flex-1 nav">
+        <ul className="space-y-5 list-none navlink">
         <li><NavLink className="hover:text-red-500" to="profile">👤 Profile Page</NavLink></li>
         <li><NavLink className="hover:text-red-500" to="my-requests">🩸 My Donation Requests</NavLink></li>
-        <li><NavLink className="hover:text-red-500" to="create-request">➕ Create Donation Request</NavLink></li>
+        <li><NavLink className="hover:text-red-500" to="createRequest">➕ Create Donation Request</NavLink></li>
         <li><NavLink className="hover:text-red-500" to="all-requests">📋 All Blood Donation Requests</NavLink></li>
         </ul>
       </nav>

@@ -44,7 +44,7 @@ export const router= createBrowserRouter([
                 element:<MainDashBoard></MainDashBoard>
             },
             {
-                path:'dashboard/createRequest',
+                path:'/dashboard/createRequest',
                 element:<CreateRequest></CreateRequest>
             }
         ]
