@@ -1,16 +1,23 @@
 import React from "react";
 import { NavLink } from "react-router";
+import { MdDashboardCustomize } from "react-icons/md";
+
 
 const Aside = () => {
   return (
-    <aside className="w-64 min-h-screen bg-green-200 p-4 flex flex-col">
+    <aside className="text-xs md:text-base w-64 min-h-screen bg-green-200 p-4 flex flex-col">
       <h2 className="text-xl font-bold mb-6"><p>Blood<span className='text-red-500'>Bank</span>BD</p></h2>
 
       <nav className="space-y-2  flex-1 nav">
         <ul className="space-y-5 list-none navlink">
-        <li><NavLink className="hover:text-red-500" to="profile">👤 Profile Page</NavLink></li>
+        <li><NavLink className="hover:text-red-500" to="/dashboard"><p className="flex items-center gap-1"><MdDashboardCustomize />Dashboard</p></NavLink></li>
+
+        <li><NavLink className="hover:text-red-500" to="profile">🧑‍🏫Profile Page</NavLink></li>
+
         <li><NavLink className="hover:text-red-500" to="my-requests">🩸 My Donation Requests</NavLink></li>
+        
         <li><NavLink className="hover:text-red-500" to="createRequest">➕ Create Donation Request</NavLink></li>
+
         <li><NavLink className="hover:text-red-500" to="all-requests">📋 All Blood Donation Requests</NavLink></li>
         </ul>
       </nav>

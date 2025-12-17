@@ -121,7 +121,7 @@ const Register = () => {
         <div className="text-center">
           <h1 className="text-5xl font-bold">Register now!</h1>
         </div>
-        <div className="card bg-[#cc7272] w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-red-400 w-full max-w-sm shrink-0 shadow-2xl">
           <div className="card-body  rounded-2xl">
             <form onSubmit={handleRegister}>
               <fieldset className="fieldset">
@@ -143,15 +143,14 @@ const Register = () => {
                   required
                 />
 
-                <label className="label">Photo</label>
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend">select a Photo</legend>
+                  <legend className="label">select a Photo</legend>
                   <input type="file" className="file-input" name="photo" />
                 </fieldset>
 
                 {/* Blood */}
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend">Blood Group</legend>
+                  <legend className="label">Blood Group</legend>
                   <select value={bloodGroup} 
                   onChange={(e)=>setBloodGroup(e.target.value)}
                   className="select"
@@ -171,7 +170,7 @@ const Register = () => {
 
                 {/* Districts */}
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend">District</legend>
+                  <legend className="label">District</legend>
                   <select  
                   className="select"
                   value={district} 
@@ -191,7 +190,7 @@ const Register = () => {
 
                 {/* Upazillas */}
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend">Upazila</legend>
+                  <legend className="label">Upazila</legend>
                   <select  
                   className="select"
                   value={upazila}

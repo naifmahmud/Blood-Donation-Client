@@ -67,7 +67,8 @@ const CreateRequest = () => {
 }
 
   return (
-    <div className="card bg-[#cc7272] shrink-0 shadow-2xl mx-auto my-10 w-2xl">
+    <div className="card bg-red-400 shrink-0 shadow-2xl mx-auto my-10 md:w-2xl">
+      <h1 className="text-2xl font-semibold text-center mt-5">Blood Donation Request Form</h1>
       <div className="card-body rounded-2xl ">
         <form onSubmit={handleRegister}>
           <fieldset className="fieldset">
