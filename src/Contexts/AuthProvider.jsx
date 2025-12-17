@@ -52,8 +52,7 @@ const AuthProvider = ({children}) => {
     },[user])
 
     // console.log(role);
-    
-    
+   
     
 
     const userInfo={

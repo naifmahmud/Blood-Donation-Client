@@ -1,13 +1,13 @@
 
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../../../Contexts/AuthContext";
-import useAxios from "../../../hooks/useAxios";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const CreateRequest = () => {
     const {user}=use(AuthContext);
 
-    const axiosInstance=useAxios();
+    const axiosSecure= useAxiosSecure();
     
 
   const [districts, setDistricts] = useState([]);
@@ -32,8 +32,8 @@ const CreateRequest = () => {
   }, []);
 
   const [bloodGroup, setBloodGroup] = useState("");
-  const [district, setDistrict] = useState("");
-  const [upazila, setUpazila] = useState("");
+  const [recipientdistrict, setDistrict] = useState("");
+  const [recipientupazila, setUpazila] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -54,14 +54,14 @@ const CreateRequest = () => {
       hospital_name,
       address,
       bloodgroup: bloodGroup,
-      district,
-      upazila,
+      recipient_district:recipientdistrict,
+      recipient_upazila:recipientupazila,
       donation_date,
       donation_time,
       request_message
     };
 
-    axiosInstance.post('/requests',formData)
+    axiosSecure.post('/requests',formData)
     .then(result=>{
         console.log({success:true,result})        
     })
@@ -129,7 +129,7 @@ const CreateRequest = () => {
               <legend className="label">District</legend>
               <select
                 className="select w-full"
-                value={district}
+                value={recipientdistrict}
                 onChange={(e) => setDistrict(e.target.value)}
                 required
               >
@@ -149,7 +149,7 @@ const CreateRequest = () => {
               <legend className="label">Upazila</legend>
               <select
                 className="select w-full"
-                value={upazila}
+                value={recipientupazila}
                 onChange={(e) => setUpazila(e.target.value)}
                 required
               >
