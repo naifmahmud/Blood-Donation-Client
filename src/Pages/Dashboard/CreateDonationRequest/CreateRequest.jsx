@@ -43,6 +43,9 @@ const CreateRequest = () => {
     const recipientName= e.target.recipient.value;
     const hospital_name= e.target.hospital.value;
     const address= e.target.address.value;
+    const donation_date= e.target.date.value;
+    const donation_time= e.target.time.value;
+    const request_message= e.target.details.value;
 
     const formData = {
       requester_name,
@@ -53,6 +56,9 @@ const CreateRequest = () => {
       bloodgroup: bloodGroup,
       district,
       upazila,
+      donation_date,
+      donation_time,
+      request_message
     };
 
     axiosInstance.post('/requests',formData)
@@ -159,7 +165,24 @@ const CreateRequest = () => {
 
             </fieldset>
 
-            <textarea name="details" rows={5} cols={10} className="bg-white rounded-xl p-2" placeholder="Write why you need blood" required></textarea>
+            <label className="label">Donation Date</label>
+            <input
+              type="date"
+              name="date"
+              className="input w-full"
+              required
+            />
+            
+            <label className="label">Donation Time</label>
+            <input
+              type="time"
+              name="time"
+              className="input w-full"
+              required
+            />
+
+            <textarea name="details" rows={5} cols={10} className="bg-white rounded-xl p-2" placeholder="Write why you need blood"
+             required></textarea>
 
             <button className="btn mt-4">Request</button>
           </fieldset>
