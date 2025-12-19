@@ -61,7 +61,7 @@ const CreateRequest = () => {
       request_message
     };
 
-    axiosSecure.post('/requests',formData)
+    await axiosSecure.post('/requests',formData)
     .then(result=>{
         console.log({success:true,result})        
     })

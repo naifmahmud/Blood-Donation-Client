@@ -1,39 +1,94 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router";
 import { MdDashboardCustomize } from "react-icons/md";
-
+import { AuthContext } from "../../../Contexts/AuthContext";
+import { toast } from "react-toastify";
 
 const Aside = () => {
+  const { signOutUser, role } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    signOutUser()
+      .then(() => {
+        toast.warning("User Logged Out");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
+
   return (
     <aside className="text-xs md:text-base w-64 min-h-screen bg-green-200 p-4 flex flex-col">
-      <h2 className="text-xl font-bold mb-6"><p>Blood<span className='text-red-500'>Bank</span>BD</p></h2>
+      <h2 className="text-xl font-bold mb-6">
+        <p>
+          Blood<span className="text-red-500">Bank</span>BD
+        </p>
+      </h2>
 
       <nav className="space-y-2  flex-1 nav">
         <ul className="space-y-5 list-none navlink">
-        <li><NavLink className="hover:text-red-500" to="/dashboard"><p className="flex items-center gap-1"><MdDashboardCustomize />Dashboard</p></NavLink></li>
+          <li>
+            <NavLink className="hover:text-red-500" to="/dashboard">
+              <p className="flex items-center gap-1">
+                <MdDashboardCustomize />
+                Dashboard
+              </p>
+            </NavLink>
+          </li>
 
-        <li><NavLink className="hover:text-red-500" to="profile">🧑‍🏫Profile Page</NavLink></li>
+          <li>
+            <NavLink className="hover:text-red-500" to="profile">
+              🧑‍🏫Profile Page
+            </NavLink>
+          </li>
 
-        <li><NavLink className="hover:text-red-500" to="my-requests">🩸 My Donation Requests</NavLink></li>
-        
-        <li><NavLink className="hover:text-red-500" to="createRequest">➕ Create Donation Request</NavLink></li>
+          {role === "donor" && (
+            <li>
+              <NavLink className="hover:text-red-500" to="myDonationRequests">
+                🩸 My Donation Requests
+              </NavLink>
+            </li>
+          )}
 
-        <li><NavLink className="hover:text-red-500" to="all-requests">📋 All Blood Donation Requests</NavLink></li>
+          {role === "admin" && (
+            <li>
+              <NavLink className="hover:text-red-500" to="allUsers">
+                👤All Users
+              </NavLink>
+            </li>
+          )}
+
+          {role === "donor" && (
+            <li>
+              <NavLink className="hover:text-red-500" to="createRequest">
+                ➕ Create Donation Request
+              </NavLink>
+            </li>
+          )}
+
+          {role === "admin" && (
+            <li>
+              <NavLink
+                className="hover:text-red-500"
+                to="allBloodDontionRequest"
+              >
+                📋 All Blood Donation Requests
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
       <nav className="flex items-end">
         <div className="md:flex gap-5">
           <NavLink to="/">
             <button className="Btn">
-            <div className="sign">
-               🏠
-            </div>
+              <div className="sign">🏠</div>
 
-            <div className="text">Home</div>
-          </button>
+              <div className="text">Home</div>
+            </button>
           </NavLink>
 
-          <button className="Btn">
+          <button className="Btn" onClick={handleLogOut}>
             <div className="sign">
               <svg viewBox="0 0 512 512">
                 <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>

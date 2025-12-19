@@ -10,6 +10,9 @@ import MainDashBoard from "../Pages/Dashboard/MainDashBoard/MainDashBoard";
 import CreateRequest from "../Pages/Dashboard/CreateDonationRequest/CreateRequest";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "../Pages/Dashboard/Profile/Profile";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AllBloodDonationRequest from "../Pages/Dashboard/All Blood Donation Request/AllBloodDonationRequest";
+import MyDonationRequests from "../Pages/Dashboard/My Donation Request/MyDonationRequests";
 
 export const router= createBrowserRouter([
     {
@@ -52,8 +55,20 @@ export const router= createBrowserRouter([
                 element:<Profile></Profile>
             },
             {
+                path:'/dashboard/allUsers',
+                element:<AllUsers></AllUsers>
+            },
+            {
                 path:'/dashboard/createRequest',
                 element:<CreateRequest></CreateRequest>
+            },
+            {
+                path:'/dashboard/myDonationRequests',
+                element:<MyDonationRequests></MyDonationRequests>
+            },
+            {
+                path:'/dashboard/allBloodDontionRequest',
+                element:<AllBloodDonationRequest></AllBloodDonationRequest>
             }
         ]
 

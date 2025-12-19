@@ -156,7 +156,7 @@ const Register = () => {
                   className="select"
                   required
                   >
-                    <option disabled={true}>Select a Blood Group</option>
+                    <option value="">Select a Blood Group</option>
                     <option value="A+">A+</option>
                     <option value="A-">A-</option>
                     <option value="B+">B+</option>
@@ -175,8 +175,9 @@ const Register = () => {
                   className="select"
                   value={district} 
                   onChange={(e)=>setDistrict(e.target.value)}
+                  required
                   >
-                    <option disabled={true}>Select a District</option>
+                    <option value="">Select a District</option>
                     {
                       districts.map(dist=>{
 
@@ -194,8 +195,10 @@ const Register = () => {
                   <select  
                   className="select"
                   value={upazila}
-                  onChange={(e)=>setUpazila(e.target.value)}>
-                    <option disabled={true}>Select a Upazila</option>
+                  onChange={(e)=>setUpazila(e.target.value)}
+                  required
+                  >
+                    <option value="">Select a Upazila</option>
                     {
                       upazilas.map(upazil=>{
                         return(

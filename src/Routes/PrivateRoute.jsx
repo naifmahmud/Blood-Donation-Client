@@ -4,20 +4,20 @@ import { Navigate, useLocation } from 'react-router';
 
 const PrivateRoute = ({children}) => {
 
-    const {user,loading}=use(AuthContext);
+    const {user,loading,roleLoading,userStatus}=use(AuthContext);
 
     const location= useLocation();
 
 
-    if(loading){
-        return <div className="skeleton h-32 w-32"></div>
+    if(loading || roleLoading){
+        return <span className="mx-auto loading loading-bars loading-xl"></span>
     }
 
-    if(user){
-        return children
+    if(!user || !userStatus==="active"){
+        return <Navigate state={location?.pathname} to="/login"></Navigate>
     }
     else{
-        return <Navigate state={location?.pathname} to="/login"></Navigate>
+        return children
     }
 };
 
