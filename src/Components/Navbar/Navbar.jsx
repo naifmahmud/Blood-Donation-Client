@@ -4,24 +4,36 @@ import { AuthContext } from "../../Contexts/AuthContext";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
-
-  const {user,signOutUser}= use(AuthContext);
+  const { user, signOutUser } = use(AuthContext);
   const links = (
     <>
-      <li><NavLink to="/">Home</NavLink></li>
-      <li><NavLink  to="/bloodRequests">Blood Requests</NavLink></li>
-      <li><NavLink to="/funding">Funding</NavLink></li>
-      <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+      
+      <li>
+        <NavLink to="/bloodRequests">Blood Requests</NavLink>
+      </li>
+      <li>
+        <NavLink to="/search">Search</NavLink>
+      </li>
+      <li>
+        <NavLink to="/funding">Funding</NavLink>
+      </li>
+      {
+        user && <li>
+        <NavLink to="/dashboard">Dashboard</NavLink>
+      </li>
+      }
     </>
   );
 
-  const handleLogOut=()=>{
-      signOutUser().then(()=>{
-        toast.warning("User Logged Out")
-      }).catch(err=>{
-        toast.error(err.message)
+  const handleLogOut = () => {
+    signOutUser()
+      .then(() => {
+        toast.warning("User Logged Out");
       })
-    }
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -51,15 +63,29 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn text-2xl font-bold"><p>Blood<span className='text-red-500'>Bank</span>BD</p></a>
+
+        <NavLink to="/">
+          {" "}
+          <a className="btn text-2xl font-bold">
+            <p>
+              Blood<span className="text-red-500">Bank</span>BD
+            </p>
+          </a>
+        </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {links}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        {user?<button className="btn" onClick={handleLogOut}>LogOut</button>:<NavLink className="btn" to="/login">Login</NavLink>}
+        {user ? (
+          <button className="btn" onClick={handleLogOut}>
+            LogOut
+          </button>
+        ) : (
+          <NavLink className="btn" to="/login">
+            Login
+          </NavLink>
+        )}
       </div>
     </div>
   );

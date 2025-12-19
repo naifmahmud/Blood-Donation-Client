@@ -13,6 +13,7 @@ import Profile from "../Pages/Dashboard/Profile/Profile";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AllBloodDonationRequest from "../Pages/Dashboard/All Blood Donation Request/AllBloodDonationRequest";
 import MyDonationRequests from "../Pages/Dashboard/My Donation Request/MyDonationRequests";
+import PaymentSuccess from "../Pages/Payment Success/PaymentSuccess";
 
 export const router= createBrowserRouter([
     {
@@ -37,7 +38,11 @@ export const router= createBrowserRouter([
             },
             {
                 path:"/funding",
-                element:<Funding></Funding>
+                element:<PrivateRoute><Funding></Funding></PrivateRoute>
+            },
+            {
+                path:"/payment_success",
+                element:<PaymentSuccess></PaymentSuccess>
             }
         ]
     },
