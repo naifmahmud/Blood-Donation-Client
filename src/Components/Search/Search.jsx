@@ -6,6 +6,7 @@ const Search = () => {
   const [districts, setDistricts] = useState([]);
   const [upazilas, setUpazilas] = useState([]);
   const [bloodRequest, setBloodRequest] = useState([]);
+  const [hasSearch,setHasSearch]=useState(false);
   const axiosInstance = useAxios();
 
   useEffect(() => {
@@ -33,13 +34,7 @@ const Search = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
 
-    const formData = {
-      bloodGroup,
-      district,
-      upazila,
-    };
-    console.log(formData);
-
+    setHasSearch(true);
     axiosInstance
       .get("/search", {
         params: {
@@ -56,7 +51,8 @@ const Search = () => {
 
   return (
     <div>
-      <div className="card bg-red-400 w-full md:w-2xl mx-auto shrink-0 shadow-2xl my-20">
+      <h1 className="text-2xl font-bold text-center mt-5">Find Donor Requests</h1>
+      <div className="card bg-red-400 w-full md:w-2xl mx-auto shrink-0 shadow-2xl my-10">
         <div className="card-body rounded-2xl flex justify-center md:items-center">
           <form
             onSubmit={handleSearch}
@@ -129,12 +125,16 @@ const Search = () => {
         </div>
       </div>
 
-      <div>
+      {
+        hasSearch && <div >
         <h1 className="text-2xl font-bold text-center my-10">Blood Requests Found 🔍"<span className="text-xl font-semibold text-red-500">{bloodRequest.length}</span>"</h1>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 my-10">
+          
           {bloodRequest.map((req) =><SearchRequest req={req} key={req._id}></SearchRequest>)}
         </div>
       </div>
+        
+      }
     </div>
   );
 };

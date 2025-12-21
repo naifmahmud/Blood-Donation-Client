@@ -20,9 +20,9 @@ const MyDonationRequests = () => {
   console.log(myRequest);
 
   const numberOfPages = Math.ceil(totalRequest / itemsPerPage);
-  console.log(numberOfPages);
+  // console.log(numberOfPages);
   const pages = [...Array(numberOfPages).keys()].map((page) => page + 1);
-  console.log(pages);
+  // console.log(pages);
 
   return (
     <div>
