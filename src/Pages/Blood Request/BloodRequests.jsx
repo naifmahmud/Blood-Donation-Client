@@ -18,10 +18,13 @@ const BloodRequests = () => {
     
 
     return (
-        <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 my-10'>
+        <div>
+            <h1 className='text-2xl font-bold text-center mt-5'>All Blood Donation Requests</h1>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5 my-10'>
             {
                 allRequests.map(req=><BloodRequestCard req={req} key={req._id}></BloodRequestCard>)
             }
+        </div>
         </div>
     );
 };

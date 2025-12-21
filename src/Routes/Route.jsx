@@ -15,6 +15,7 @@ import AllBloodDonationRequest from "../Pages/Dashboard/All Blood Donation Reque
 import MyDonationRequests from "../Pages/Dashboard/My Donation Request/MyDonationRequests";
 import PaymentSuccess from "../Pages/Payment Success/PaymentSuccess";
 import Search from "../Components/Search/Search";
+import BloodRequestDetails from "../Pages/Blood Request/BloodRequestDetails";
 
 export const router= createBrowserRouter([
     {
@@ -36,6 +37,12 @@ export const router= createBrowserRouter([
             {
                 path:"/bloodRequests",
                 Component:BloodRequests
+            },
+            {
+                path:"/bloodRequests/:id",
+                element: <PrivateRoute>
+                    <BloodRequestDetails></BloodRequestDetails>
+                </PrivateRoute>
             },
             {
                 path:"/funding",

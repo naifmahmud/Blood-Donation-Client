@@ -78,6 +78,22 @@ const CreateRequest = () => {
       <div className="card-body rounded-2xl ">
         <form onSubmit={handleRegister}>
           <fieldset className="fieldset">
+            <label className="label">Requester Name</label>
+            <input
+              type="text"
+              className="input w-full text-black"
+              defaultValue={user.displayName}
+              disabled
+              required
+            />
+            <label className="label">Requester Email</label>
+            <input
+              type="text"
+              className="input w-full text-black"
+              defaultValue={user.email}
+              disabled
+              required
+            />
             <label className="label">Recipient Name</label>
             <input
               type="text"
