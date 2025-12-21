@@ -14,6 +14,7 @@ import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AllBloodDonationRequest from "../Pages/Dashboard/All Blood Donation Request/AllBloodDonationRequest";
 import MyDonationRequests from "../Pages/Dashboard/My Donation Request/MyDonationRequests";
 import PaymentSuccess from "../Pages/Payment Success/PaymentSuccess";
+import Search from "../Components/Search/Search";
 
 export const router= createBrowserRouter([
     {
@@ -39,6 +40,10 @@ export const router= createBrowserRouter([
             {
                 path:"/funding",
                 element:<PrivateRoute><Funding></Funding></PrivateRoute>
+            },
+            {
+                path:"/search",
+                element:<Search></Search>
             },
             {
                 path:"/payment_success",
