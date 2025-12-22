@@ -102,6 +102,7 @@ const Aside = () => {
             </>
           )}
 
+
           {/* Admin Routes */}
           {role === "admin" && (
             <>
@@ -138,6 +139,26 @@ const Aside = () => {
               </li>
             </>
           )}
+
+
+          {
+            role=== "volunteer" &&
+            <li>
+                <NavLink
+                  to="allBloodDontionRequest"
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-2 rounded-xl transition
+                 ${
+                   isActive
+                     ? "bg-white text-red-600 font-semibold shadow"
+                     : "hover:bg-white/20"
+                 }`
+                  }
+                >
+                  📋 All Requests
+                </NavLink>
+              </li>
+          }
         </ul>
       </nav>
 

@@ -16,11 +16,13 @@ import MyDonationRequests from "../Pages/Dashboard/My Donation Request/MyDonatio
 import PaymentSuccess from "../Pages/Payment Success/PaymentSuccess";
 import Search from "../Components/Search/Search";
 import BloodRequestDetails from "../Pages/Blood Request/BloodRequestDetails";
+import Error from "../ErrorPage/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement:<Error></Error>,
     children: [
       {
         index: true,
@@ -71,6 +73,7 @@ export const router = createBrowserRouter([
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
+    errorElement:<Error></Error>,
     children: [
       { index: true, element: <MainDashBoard></MainDashBoard> },
       {
@@ -95,4 +98,8 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path:"*",
+    element:<Error></Error>
+  }
 ]);

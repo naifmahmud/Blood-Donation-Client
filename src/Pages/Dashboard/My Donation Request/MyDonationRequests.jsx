@@ -4,7 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 const MyDonationRequests = () => {
   const [myRequest, setMyRequest] = useState([]);
   const [totalRequest, setTotalRequest] = useState(0);
-  const [itemsPerPage, setIteamPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [status,setStatus]=useState("all");
   const axiosSecure = useAxiosSecure();

@@ -2,12 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Contexts/AuthContext";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router";
+import { FaUsers, FaHandHoldingHeart, FaTint } from "react-icons/fa";
+
+
 const MainDashBoard = () => {
-  const { user } = useContext(AuthContext);
+  const { user,role } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
   const [requests, setRequests] = useState([]);
-
-  console.log(user);
+ 
+  const [stats,setStats]=useState({
+    totalUsers:0,
+    totalFunding:0,
+    totalRequests:0,
+  })
 
   useEffect(() => {
     if (!user?.email) return;
@@ -18,7 +25,14 @@ const MainDashBoard = () => {
       .then((res) => setRequests(res.data.result));
   }, [axiosSecure, user.email]);
 
-  console.log(requests);
+  useEffect(()=>{
+    axiosSecure.get("/dashboard/stats").then(res=>
+    setStats(res.data)
+    )
+  },[axiosSecure])
+
+  console.log(stats);
+  
 
   return (
     <div>
@@ -31,8 +45,11 @@ const MainDashBoard = () => {
           <p className="text-sm opacity-90">Thank you for being a lifesaver</p>
         </div>
 
-        {/* Recent Requests */}
-        {requests.length > 0 && (
+        
+        { 
+        role === 'donor' &&
+          <div>
+            {requests.length > 0 && (
           <div className="mt-8 bg-white rounded-2xl shadow-xl p-6">
             <h2 className="text-xl font-semibold mb-4">
               My Recent Donation Requests
@@ -144,6 +161,51 @@ const MainDashBoard = () => {
             </div>
           </div>
         )}
+          </div>
+        }
+        {
+         role === 'admin' &&
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+      
+      {/* Total Donors */}
+      <div className="bg-white rounded-2xl shadow-md p-6 flex items-center gap-4 hover:shadow-xl transition">
+        <div className="p-4 rounded-full bg-red-100 text-red-500 text-3xl">
+          <FaUsers />
+        </div>
+        <div>
+          <h3 className="text-2xl font-bold">{stats.totalUsers}</h3>
+          <p className="text-gray-500 font-medium">Total Donors</p>
+        </div>
+      </div>
+
+      {/* Total Funding */}
+      <div className="bg-white rounded-2xl shadow-md p-6 flex items-center gap-4 hover:shadow-xl transition">
+        <div className="p-4 rounded-full bg-green-100 text-green-600 text-3xl">
+          <FaHandHoldingHeart />
+        </div>
+        <div>
+          <h3 className="text-2xl font-bold">
+            ৳ {stats.totalFunding.toLocaleString()}
+          </h3>
+          <p className="text-gray-500 font-medium">Total Funding</p>
+        </div>
+      </div>
+
+      {/* Total Blood Requests */}
+      <div className="bg-white rounded-2xl shadow-md p-6 flex items-center gap-4 hover:shadow-xl transition">
+        <div className="p-4 rounded-full bg-red-200 text-red-700 text-3xl">
+          <FaTint />
+        </div>
+        <div>
+          <h3 className="text-2xl font-bold">{stats.totalRequests}</h3>
+          <p className="text-gray-500 font-medium">
+            Blood Donation Requests
+          </p>
+        </div>
+      </div>
+
+    </div>
+        }
       </div>
     </div>
   );
