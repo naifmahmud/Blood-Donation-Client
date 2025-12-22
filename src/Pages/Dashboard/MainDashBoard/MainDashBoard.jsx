@@ -3,6 +3,7 @@ import { AuthContext } from "../../../Contexts/AuthContext";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link } from "react-router";
 import { FaUsers, FaHandHoldingHeart, FaTint } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 
 const MainDashBoard = () => {
@@ -31,7 +32,26 @@ const MainDashBoard = () => {
     )
   },[axiosSecure])
 
-  console.log(stats);
+  // console.log(stats);
+  const handleDelete = (id) => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this request?"
+  );
+
+  if (!confirmDelete) return;
+
+  axiosSecure
+    .delete(`/myRequests/${id}`)
+    .then(() => {
+      setRequests((prev) => prev.filter((req) => req._id !== id));
+      alert("Request deleted successfully");
+    })
+    .catch((err) => {
+      console.error(err);
+      toast.success("Failed to delete request");
+    });
+};
+
   
 
   return (
@@ -133,16 +153,10 @@ const MainDashBoard = () => {
                           Edit
                         </Link>
 
-                        <button className="btn btn-xs btn-outline btn-error">
+                        <button onClick={()=>{handleDelete(req._id)}} className="btn btn-xs btn-outline btn-error">
                           Delete
                         </button>
 
-                        <Link
-                          to={`/dashboard/request-details/${req._id}`}
-                          className="btn btn-xs btn-outline btn-info"
-                        >
-                          View
-                        </Link>
                       </td>
                     </tr>
                   ))}

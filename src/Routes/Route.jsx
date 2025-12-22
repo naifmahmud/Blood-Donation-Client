@@ -17,6 +17,7 @@ import PaymentSuccess from "../Pages/Payment Success/PaymentSuccess";
 import Search from "../Components/Search/Search";
 import BloodRequestDetails from "../Pages/Blood Request/BloodRequestDetails";
 import Error from "../ErrorPage/Error";
+import EditRequest from "../Pages/Dashboard/Edit Requests/EditRequest";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/myDonationRequests",
         element: <MyDonationRequests></MyDonationRequests>,
+      },
+      {
+        path:'/dashboard/edit-request/:id',
+        element:<EditRequest></EditRequest>
       },
       {
         path: "/dashboard/allBloodDontionRequest",
