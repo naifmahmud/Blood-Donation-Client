@@ -18,87 +18,145 @@ const Aside = () => {
   };
 
   return (
-    <aside className="text-xs md:text-base w-64 min-h-screen bg-green-200 p-4 flex flex-col">
-      <h2 className="text-xl font-bold mb-6">
-        <p>
-          Blood<span className="text-red-500">Bank</span>BD
-        </p>
-      </h2>
+    <aside className="w-64 min-h-screen bg-linear-to-b from-red-500 via-red-600 to-rose-700 text-white flex flex-col shadow-2xl">
+      {/* Logo */}
+      <div className="px-6 py-6 border-b border-white/20">
+        <h2 className="text-2xl font-extrabold tracking-wide">
+          Blood<span className="text-black">Bank</span>BD
+        </h2>
+        <p className="text-xs text-white/70 mt-1">Save Lives Together</p>
+      </div>
 
-      <nav className="space-y-2  flex-1 nav">
-        <ul className="space-y-5 list-none navlink">
+      {/* Navigation */}
+      <nav className="flex-1 px-4 py-6">
+        <ul className="space-y-3">
+          {/* Dashboard */}
           <li>
-            <NavLink className="hover:text-red-500" to="/dashboard">
-              <p className="flex items-center gap-1">
-                <MdDashboardCustomize />
-                Dashboard
-              </p>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-4 py-2 rounded-xl transition
+             ${
+               isActive
+                 ? "bg-white text-red-600 font-semibold shadow"
+                 : "hover:bg-white/20"
+             }`
+              }
+            >
+              <MdDashboardCustomize className="text-lg" />
+              Dashboard
             </NavLink>
           </li>
 
+          {/* Profile */}
           <li>
-            <NavLink className="hover:text-red-500" to="profile">
-              🧑‍🏫Profile Page
+            <NavLink
+              to="profile"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-4 py-2 rounded-xl transition
+             ${
+               isActive
+                 ? "bg-white text-red-600 font-semibold shadow"
+                 : "hover:bg-white/20"
+             }`
+              }
+            >
+              👤 Profile
             </NavLink>
           </li>
 
+          {/* Donor Routes */}
           {role === "donor" && (
-            <li>
-              <NavLink className="hover:text-red-500" to="myDonationRequests">
-                🩸 My Donation Requests
-              </NavLink>
-            </li>
+            <>
+              <li>
+                <NavLink
+                  to="myDonationRequests"
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-2 rounded-xl transition
+                 ${
+                   isActive
+                     ? "bg-white text-red-600 font-semibold shadow"
+                     : "hover:bg-white/20"
+                 }`
+                  }
+                >
+                  🩸 My Requests
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="createRequest"
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-2 rounded-xl transition
+                 ${
+                   isActive
+                     ? "bg-white text-red-600 font-semibold shadow"
+                     : "hover:bg-white/20"
+                 }`
+                  }
+                >
+                  ➕ Create Request
+                </NavLink>
+              </li>
+            </>
           )}
 
+          {/* Admin Routes */}
           {role === "admin" && (
-            <li>
-              <NavLink className="hover:text-red-500" to="allUsers">
-                👤All Users
-              </NavLink>
-            </li>
-          )}
+            <>
+              <li>
+                <NavLink
+                  to="allUsers"
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-2 rounded-xl transition
+                 ${
+                   isActive
+                     ? "bg-white text-red-600 font-semibold shadow"
+                     : "hover:bg-white/20"
+                 }`
+                  }
+                >
+                  👥 All Users
+                </NavLink>
+              </li>
 
-          {role === "donor" && (
-            <li>
-              <NavLink className="hover:text-red-500" to="createRequest">
-                ➕ Create Donation Request
-              </NavLink>
-            </li>
-          )}
-
-          {role === "admin" && (
-            <li>
-              <NavLink
-                className="hover:text-red-500"
-                to="allBloodDontionRequest"
-              >
-                📋 All Blood Donation Requests
-              </NavLink>
-            </li>
+              <li>
+                <NavLink
+                  to="allBloodDontionRequest"
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-2 rounded-xl transition
+                 ${
+                   isActive
+                     ? "bg-white text-red-600 font-semibold shadow"
+                     : "hover:bg-white/20"
+                 }`
+                  }
+                >
+                  📋 All Requests
+                </NavLink>
+              </li>
+            </>
           )}
         </ul>
       </nav>
-      <nav className="flex items-end">
-        <div className="md:flex gap-5">
-          <NavLink to="/">
-            <button className="Btn">
-              <div className="sign">🏠</div>
 
-              <div className="text">Home</div>
-            </button>
-          </NavLink>
+      {/* Footer Actions */}
+      <div className="px-4 py-4 border-t border-white/20 space-y-3">
+        <NavLink
+          to="/"
+          className="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-white text-red-600 font-semibold hover:bg-red-500 hover:text-white transition"
+        >
+          🏠 Home
+        </NavLink>
 
-          <button className="Btn" onClick={handleLogOut}>
-            <div className="sign">
-              <svg viewBox="0 0 512 512">
-                <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
-              </svg>
-            </div>
-
-            <div className="text">Logout</div>
-          </button>
-        </div>
-      </nav>
+        <button
+          onClick={handleLogOut}
+          className="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-black/30 hover:bg-white hover:text-red-500 transition font-semibold"
+        >
+          🚪 Logout
+        </button>
+      </div>
     </aside>
   );
 };

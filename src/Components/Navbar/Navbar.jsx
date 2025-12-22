@@ -7,13 +7,12 @@ const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
   const links = (
     <>
-      
       <li>
-        <NavLink to="/search">Search</NavLink>
+        <NavLink className={({isActive})=>isActive?'text-red-500 font-bold':'font-semibold'} to="/bloodRequests">Blood Requests</NavLink>
       </li>
       {user && (
                 <li>
-                  <NavLink className={({isActive})=>isActive?'text-red-500':'font-semibold'} to="/funding">Funding</NavLink>
+                  <NavLink className={({isActive})=>isActive?'text-red-500 font-bold':'font-semibold'} to="/funding">Funding</NavLink>
                 </li>
               )}
     </>
@@ -69,14 +68,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          <li>
-        <NavLink className={({isActive})=>isActive?'text-red-500':'font-semibold'} to="/bloodRequests">Blood Requests</NavLink>
-      </li>
-      {user && (
-                <li>
-                  <NavLink className={({isActive})=>isActive?'text-red-500':'font-semibold'} to="/funding">Funding</NavLink>
-                </li>
-              )}
+          {links}
         </ul>
       </div>
       {/* <div className="navbar-end"> */}
@@ -100,32 +92,23 @@ const Navbar = () => {
             >
               {user && (
                 <li>
-                  <NavLink className={({isActive})=>isActive?'text-red-500':'font-semibold'} to="/dashboard">Dashboard</NavLink>
+                  <NavLink className={({isActive})=>isActive?'text-red-500':'font-semibold btn bg-linear-to-br from-red-200 via-red-500 to-rose-600 text-white'} to="/dashboard" >Dashboard</NavLink>
                 </li>
               )}
               
               <li className="font-semibold">
-                <button onClick={handleLogOut}>LogOut</button>
+                <button onClick={handleLogOut} className="btn bg-linear-to-br from-red-200 via-red-300 to-rose-500 text-white">Log Out</button>
               </li>
             </ul>
           </div>
         ) : (
-          <NavLink to="/login" className="btn bg-linear-to-br from-red-200 via-red-500 to-rose-600 text-white">
+          <NavLink to="/login" className="btn bg-linear-to-br from-red-200 via-red-300 to-rose-500 text-white">
             Login
           </NavLink>
         )}
       </div>
     </div>
 
-    /* {user ? (
-          <button className="btn" onClick={handleLogOut}>
-            LogOut
-          </button>
-        ) : (
-          <NavLink className="btn" to="/login">
-            Login
-          </NavLink>
-        )} */
   );
 };
 
