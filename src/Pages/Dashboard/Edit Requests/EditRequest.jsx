@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const EditRequest = () => {
   const { id } = useParams();
@@ -40,14 +41,13 @@ const EditRequest = () => {
       });
   }, []);
 
-  // 🔹 Load existing request
   useEffect(() => {
-    axiosSecure.get(`/requests/${id}`).then((res) => {
+    axiosSecure.get(`/myRequests/${id}`).then((res) => {
       setFormData(res.data);
     });
   }, [axiosSecure, id]);
 
-  // 🔹 Handle change
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -59,8 +59,8 @@ const EditRequest = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axiosSecure.patch(`/requests/${id}`, formData).then(() => {
-      alert("Request updated successfully!");
+    axiosSecure.patch(`/myRequests/${id}`, formData).then(() => {
+      toast.success("Request updated successfully!");
       navigate("/dashboard/myDonationRequests");
     });
   };
