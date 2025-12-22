@@ -29,7 +29,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar sticky top-0 z-50 
+bg-white/30 backdrop-blur-md 
+border-b border-white/20 shadow-sm"
+>
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -58,7 +61,7 @@ const Navbar = () => {
         </div>
 
         <NavLink to="/">
-            <p className="btn text-2xl font-bold bg-white/80">
+            <p className="text-2xl font-bold bg-transparent">
               Blood<span className="text-red-500">Bank</span>BD
             </p>
         </NavLink>
