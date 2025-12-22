@@ -25,6 +25,7 @@ const Aside = () => {
           Blood<span className="text-black">Bank</span>BD
         </h2>
         <p className="text-xs text-white/70 mt-1">Save Lives Together</p>
+        <p className="text-xs text-white/70"><span className="text-white font-bold">{role}</span> panel</p>
       </div>
 
       {/* Navigation */}
