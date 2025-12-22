@@ -6,16 +6,18 @@ const MyDonationRequests = () => {
   const [totalRequest, setTotalRequest] = useState(0);
   const [itemsPerPage, setIteamPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [status,setStatus]=useState("all");
   const axiosSecure = useAxiosSecure();
+
 
   useEffect(() => {
     axiosSecure
-      .get(`/myRequests?page=${currentPage - 1}&size=${itemsPerPage}`)
+      .get(`/myRequests?page=${currentPage - 1}&size=${itemsPerPage}&status=${status}`)
       .then((res) => {
         setMyRequest(res.data.request);
         setTotalRequest(res.data.totalRequest);
       });
-  }, [axiosSecure, currentPage, itemsPerPage]);
+  }, [axiosSecure, currentPage, itemsPerPage, status]);
 
   console.log(myRequest);
 
@@ -25,41 +27,88 @@ const MyDonationRequests = () => {
   // console.log(pages);
 
   return (
-    <div>
+    <div className="bg-white rounded-2xl shadow-lg p-6">
+      {/* Filter Section */}
+<div className="flex justify-between items-center mb-4">
+  <h2 className="text-lg font-bold text-gray-700">
+    My Donation Requests
+  </h2>
+
+  <select
+    value={status}
+    onChange={(e) => {
+      setStatus(e.target.value);
+      setCurrentPage(1); // reset page on filter change
+    }}
+    className="select select-bordered select-sm max-w-xs"
+  >
+    <option value="all">All Status</option>
+    <option value="pending">Pending</option>
+    <option value="inprogress">In Progress</option>
+    <option value="done">Done</option>
+    <option value="canceled">Canceled</option>
+  </select>
+</div>
+
+      {/* Table */}
       <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
+        <table className="table table-zebra w-full">
+          {/* Head */}
+          <thead className="bg-red-100 text-red-600">
             <tr>
-              <th></th>
-              <th>Recipient Name</th>
-              <th>Recipient Location</th>
-              <th>Donation Date & Donation Time</th>
-              <th>Blood Group</th>
-              <th></th>
-              <th></th>
+              <th>#</th>
+              <th>Recipient</th>
+              <th>Location</th>
+              <th>Date & Time</th>
+              <th>Blood</th>
+              <th className="text-center">Actions</th>
             </tr>
           </thead>
+
           <tbody>
             {myRequest.map((req, index) => (
-              <tr>
-                <th>{(currentPage - 1) * itemsPerPage + index + 1}</th>
-                <td>{req.recipientName}</td>
+              <tr key={req._id} className="hover">
+                {/* Index */}
+                <td className="font-semibold">
+                  {(currentPage - 1) * itemsPerPage + index + 1}
+                </td>
+
+                {/* Recipient */}
                 <td>
-                  <div>
-                    <h3 className="text-base font-semibold">
-                      {req.recipient_district}
-                    </h3>
+                  <p className="font-semibold text-gray-800">
+                    {req.recipientName}
+                  </p>
+                </td>
+
+                {/* Location */}
+                <td>
+                  <p className="font-medium">{req.recipient_district}</p>
+                  <p className="text-sm text-gray-500">
                     {req.recipient_upazila}
-                  </div>
+                  </p>
                 </td>
-                <td>{req.donation_date}</td>
-                <td>{req.bloodgroup}</td>
+
+                {/* Date & Time */}
                 <td>
-                  <button className="btn">Edit</button>
+                  <p>{req.donation_date}</p>
+                  <p className="text-sm text-gray-500">{req.donation_time}</p>
                 </td>
+
+                {/* Blood Group */}
                 <td>
-                  <button className="btn">Delete</button>
+                  <span className="px-3 py-1 rounded-full bg-red-100 text-red-600 font-semibold text-sm">
+                    {req.bloodgroup}
+                  </span>
+                </td>
+
+                {/* Actions */}
+                <td className="flex gap-2 justify-center">
+                  <button className="btn btn-sm btn-outline btn-info">
+                    ✏️ Edit
+                  </button>
+                  <button className="btn btn-sm btn-outline btn-error">
+                    🗑 Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -67,34 +116,34 @@ const MyDonationRequests = () => {
         </table>
       </div>
 
-      <div className="justify-center items-center text-center">
+      {/* Pagination */}
+      <div className="flex justify-center items-center gap-2 mt-6">
         <button
-          className="btn"
+          className="btn btn-sm"
           disabled={currentPage === 1}
-          onClick={() => {
-            setCurrentPage(currentPage - 1);
-          }}
+          onClick={() => setCurrentPage(currentPage - 1)}
         >
-          prev
+          ← Prev
         </button>
+
         {pages.map((page) => (
           <button
-            onClick={() => {
-              setCurrentPage(page);
-            }}
-            className={`btn ${
-              page === currentPage ? "bg-red-300" : "bg-white"
+            key={page}
+            onClick={() => setCurrentPage(page)}
+            className={`btn btn-sm ${
+              page === currentPage ? "bg-red-500 text-white" : "btn-outline"
             }`}
           >
             {page}
           </button>
         ))}
-        <button 
-        className="btn"
-        disabled={currentPage ===numberOfPages}
-        onClick={()=>{setCurrentPage(currentPage+1)}}
+
+        <button
+          className="btn btn-sm"
+          disabled={currentPage === numberOfPages}
+          onClick={() => setCurrentPage(currentPage + 1)}
         >
-          next
+          Next →
         </button>
       </div>
     </div>
