@@ -12,7 +12,7 @@ const AllUsers = () => {
   };
 
   useEffect(() => {
-   
+   fetchUsers();
   }, [axiosSecure]);
 
   const handleRole = async (email, role) => {

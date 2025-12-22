@@ -5,13 +5,14 @@ import { toast } from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const CreateRequest = () => {
-    const {user}=use(AuthContext);
 
+    const {user,userStatus}=use(AuthContext);
     const axiosSecure= useAxiosSecure();
-    
-
   const [districts, setDistricts] = useState([]);
   const [upazilas, setUpazilas] = useState([]);
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [recipientdistrict, setDistrict] = useState("");
+  const [recipientupazila, setUpazila] = useState("");
 
   useEffect(() => {
     fetch("/districts.json")
@@ -31,12 +32,13 @@ const CreateRequest = () => {
       });
   }, []);
 
-  const [bloodGroup, setBloodGroup] = useState("");
-  const [recipientdistrict, setDistrict] = useState("");
-  const [recipientupazila, setUpazila] = useState("");
 
+  
+  
   const handleRegister = async (e) => {
     e.preventDefault();
+    
+    if(userStatus==='blocked') return toast.warning("your account is blocked ");
 
     const requester_name = user.displayName;
     const requester_email = user.email;
