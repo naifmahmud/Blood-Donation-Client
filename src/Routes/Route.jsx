@@ -17,77 +17,82 @@ import PaymentSuccess from "../Pages/Payment Success/PaymentSuccess";
 import Search from "../Components/Search/Search";
 import BloodRequestDetails from "../Pages/Blood Request/BloodRequestDetails";
 
-export const router= createBrowserRouter([
-    {
-        path:'/',
-        Component:RootLayout,
-        children:[
-            {
-                index:true,
-                Component:Home
-            },
-            {
-                path:"/register",
-                Component:Register
-            },
-            {
-                path:"/login",
-                Component:login
-            },
-            {
-                path:"/bloodRequests",
-                Component:BloodRequests
-            },
-            {
-                path:"/bloodRequests/:id",
-                element: <PrivateRoute>
-                    <BloodRequestDetails></BloodRequestDetails>
-                </PrivateRoute>
-            },
-            {
-                path:"/funding",
-                element:<PrivateRoute><Funding></Funding></PrivateRoute>
-            },
-            {
-                path:"/search",
-                element:<Search></Search>
-            },
-            {
-                path:"/payment_success",
-                element:<PaymentSuccess></PaymentSuccess>
-            }
-        ]
-    },
-    {
-        path:'dashboard',
-        element:<PrivateRoute>
-            <DashboardLayout></DashboardLayout>
-        </PrivateRoute>,
-        children:[
-            {index:true,
-                element:<MainDashBoard></MainDashBoard>
-            },
-            {
-                path:'/dashboard/profile',
-                element:<Profile></Profile>
-            },
-            {
-                path:'/dashboard/allUsers',
-                element:<AllUsers></AllUsers>
-            },
-            {
-                path:'/dashboard/createRequest',
-                element:<CreateRequest></CreateRequest>
-            },
-            {
-                path:'/dashboard/myDonationRequests',
-                element:<MyDonationRequests></MyDonationRequests>
-            },
-            {
-                path:'/dashboard/allBloodDontionRequest',
-                element:<AllBloodDonationRequest></AllBloodDonationRequest>
-            }
-        ]
-
-    }
-])
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: RootLayout,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "/register",
+        Component: Register,
+      },
+      {
+        path: "/login",
+        Component: login,
+      },
+      {
+        path: "/bloodRequests",
+        Component: BloodRequests,
+      },
+      {
+        path: "/bloodRequests/:id",
+        element: (
+          <PrivateRoute>
+            <BloodRequestDetails></BloodRequestDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/funding",
+        element: (
+          <PrivateRoute>
+            <Funding></Funding>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/search",
+        element: <Search></Search>,
+      },
+      {
+        path: "/payment_success",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      { index: true, element: <MainDashBoard></MainDashBoard> },
+      {
+        path: "/dashboard/profile",
+        element: <Profile></Profile>,
+      },
+      {
+        path: "/dashboard/allUsers",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "/dashboard/createRequest",
+        element: <CreateRequest></CreateRequest>,
+      },
+      {
+        path: "/dashboard/myDonationRequests",
+        element: <MyDonationRequests></MyDonationRequests>,
+      },
+      {
+        path: "/dashboard/allBloodDontionRequest",
+        element: <AllBloodDonationRequest></AllBloodDonationRequest>,
+      },
+    ],
+  },
+]);

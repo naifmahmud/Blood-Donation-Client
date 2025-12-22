@@ -58,12 +58,9 @@ const Navbar = () => {
         </div>
 
         <NavLink to="/">
-          {" "}
-          <a className="btn text-2xl font-bold">
-            <p>
+            <p className="btn text-2xl font-bold bg-white/80">
               Blood<span className="text-red-500">Bank</span>BD
             </p>
-          </a>
         </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">

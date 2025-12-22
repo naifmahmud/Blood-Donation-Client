@@ -14,7 +14,7 @@ const BloodRequests = () => {
     .then(res=>setAllRequests(res.data))
     },[axiosInstance])
 
-    console.log(allRequests);
+    // console.log(allRequests);
     
 
     return (

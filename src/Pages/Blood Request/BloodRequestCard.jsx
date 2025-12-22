@@ -1,10 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router';
 
 const BloodRequestCard = ({req}) => {
+
        
             
   const { recipientName, bloodgroup, 
-donation_date, donation_time,address } = req;
+donation_date, donation_time,address,_id } = req;
+
 
   return (
     <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-5 border border-red-100">
@@ -34,9 +37,9 @@ donation_date, donation_time,address } = req;
 
       {/* Action */}
       <div className="mt-5">
-        <button className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl transition">
+        <NavLink to={`/bloodRequests/${_id}`} className=" btn w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-xl transition">
           View Details
-        </button>
+        </NavLink>
       </div>
     </div>
   );
