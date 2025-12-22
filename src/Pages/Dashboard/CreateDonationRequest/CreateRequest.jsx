@@ -73,138 +73,179 @@ const CreateRequest = () => {
 }
 
   return (
-    <div className="card bg-red-400 shrink-0 shadow-2xl mx-auto my-10 md:w-2xl">
-      <h1 className="text-2xl font-semibold text-center mt-5">Blood Donation Request Form</h1>
-      <div className="card-body rounded-2xl ">
-        <form onSubmit={handleRegister}>
-          <fieldset className="fieldset">
+    <div className="max-w-5xl mx-auto my-12 px-4">
+  <div className="rounded-3xl shadow-2xl overflow-hidden bg-linear-to-br from-red-500 via-red-600 to-rose-600">
+
+    {/* Header */}
+    <div className="px-8 py-6 text-center text-white border-b border-white/30">
+      <h1 className="text-3xl font-bold">
+        🩸 Blood Donation Request
+      </h1>
+      <p className="text-sm text-white/90 mt-1">
+        Submit accurate details to get help faster
+      </p>
+    </div>
+
+    {/* Form Body */}
+    <div className="bg-white/95 backdrop-blur p-8 md:p-10">
+      <form onSubmit={handleRegister} className="space-y-6">
+
+        {/* Requester Info */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
             <label className="label">Requester Name</label>
             <input
               type="text"
-              className="input w-full text-black"
+              className="input input-bordered w-full bg-gray-100"
               defaultValue={user.displayName}
               disabled
-              required
             />
+          </div>
+
+          <div>
             <label className="label">Requester Email</label>
             <input
               type="text"
-              className="input w-full text-black"
+              className="input input-bordered w-full bg-gray-100"
               defaultValue={user.email}
               disabled
-              required
             />
+          </div>
+        </div>
+
+        {/* Recipient Info */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
             <label className="label">Recipient Name</label>
             <input
               type="text"
               name="recipient"
-              className="input w-full"
+              className="input input-bordered w-full"
               placeholder="Recipient Name"
               required
             />
-             <label className="label">Hospital Name</label>
+          </div>
+
+          <div>
+            <label className="label">Hospital Name</label>
             <input
               type="text"
               name="hospital"
-              className="input w-full"
+              className="input input-bordered w-full"
               placeholder="Hospital Name"
               required
             />
-            <label className="label">Full Address</label>
-            <input
-              type="text"
-              name="address"
-              className="input w-full"
-              placeholder="Full Address"
+          </div>
+        </div>
+
+        {/* Address */}
+        <div>
+          <label className="label">Full Address</label>
+          <input
+            type="text"
+            name="address"
+            className="input input-bordered w-full"
+            placeholder="Full Address"
+            required
+          />
+        </div>
+
+        {/* Location & Blood */}
+        <div className="grid md:grid-cols-3 gap-6">
+          <div>
+            <label className="label">Blood Group</label>
+            <select
+              value={bloodGroup}
+              onChange={(e) => setBloodGroup(e.target.value)}
+              className="select select-bordered w-full"
               required
-            />
+            >
+              <option value="">Select</option>
+              {["A+","A-","B+","B-","AB+","AB-","O+","O-"].map(bg=>(
+                <option key={bg}>{bg}</option>
+              ))}
+            </select>
+          </div>
 
-            {/* Blood */}
-            <fieldset className="fieldset">
-              <legend className="label">Blood Group</legend>
-              <select
-                value={bloodGroup}
-                onChange={(e) => setBloodGroup(e.target.value)}
-                className="select w-full"
-                required
-              >
-                <option value={''}>Select a Blood Group</option>
-                <option value="A+">A+</option>
-                <option value="A-">A-</option>
-                <option value="B+">B+</option>
-                <option value="B-">B-</option>
-                <option value="AB+">AB+</option>
-                <option value="AB-">AB-</option>
-                <option value="O+">O+</option>
-                <option value="O-">O-</option>
-              </select>
-            </fieldset>
+          <div>
+            <label className="label">District</label>
+            <select
+              className="select select-bordered w-full"
+              value={recipientdistrict}
+              onChange={(e) => setDistrict(e.target.value)}
+              required
+            >
+              <option value="">Select</option>
+              {districts.map(dist => (
+                <option key={dist.id} value={dist.name}>
+                  {dist.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-            {/* Districts */}
-            <fieldset className="fieldset">
-              <legend className="label">District</legend>
-              <select
-                className="select w-full"
-                value={recipientdistrict}
-                onChange={(e) => setDistrict(e.target.value)}
-                required
-              >
-                <option value={''}>Select a District</option>
-                {districts.map((dist) => {
-                  return (
-                    <option key={dist.id} value={dist.name}>
-                      {dist.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </fieldset>
+          <div>
+            <label className="label">Upazila</label>
+            <select
+              className="select select-bordered w-full"
+              value={recipientupazila}
+              onChange={(e) => setUpazila(e.target.value)}
+              required
+            >
+              <option value="">Select</option>
+              {upazilas.map(up => (
+                <option key={up.id} value={up.name}>
+                  {up.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
 
-            {/* Upazillas */}
-            <fieldset className="fieldset">
-              <legend className="label">Upazila</legend>
-              <select
-                className="select w-full"
-                value={recipientupazila}
-                onChange={(e) => setUpazila(e.target.value)}
-                required
-              >
-                <option value={''}>Select a Upazila</option>
-                {upazilas.map((upazil) => {
-                  return (
-                    <option key={upazil.id} value={upazil.name}>
-                      {upazil.name}
-                    </option>
-                  );
-                })}
-              </select>
-
-            </fieldset>
-
+        {/* Date & Time */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
             <label className="label">Donation Date</label>
             <input
               type="date"
               name="date"
-              className="input w-full"
+              className="input input-bordered w-full"
               required
             />
-            
+          </div>
+
+          <div>
             <label className="label">Donation Time</label>
             <input
               type="time"
               name="time"
-              className="input w-full"
+              className="input input-bordered w-full"
               required
             />
+          </div>
+        </div>
 
-            <textarea name="details" rows={5} cols={10} className="bg-white rounded-xl p-2" placeholder="Write why you need blood"
-             required></textarea>
+        {/* Details */}
+        <div>
+          <label className="label">Requester Details</label>
+          <textarea
+            name="details"
+            rows={4}
+            className="textarea textarea-bordered w-full"
+            placeholder="Explain why blood is needed urgently"
+            required
+          ></textarea>
+        </div>
 
-            <button className="btn mt-4">Request</button>
-          </fieldset>
-        </form>
-      </div>
+        {/* Submit */}
+        <button className="btn w-full bg-linear-to-br from-red-200 via-red-500 to-rose-600 text-white hover:opacity-90">
+          🚑 Submit Request
+        </button>
+      </form>
     </div>
+  </div>
+</div>
+
   );
 };
 

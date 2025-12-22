@@ -121,154 +121,172 @@ const Register = () => {
         <div className="text-center">
           <h1 className="text-5xl font-bold">Register now!</h1>
         </div>
-        <div className="card bg-red-400 w-full max-w-sm shrink-0 shadow-2xl">
-          <div className="card-body  rounded-2xl">
-            <form onSubmit={handleRegister}>
-              <fieldset className="fieldset">
-                <label className="label">Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  className="input"
-                  placeholder="Name"
-                  required
-                />
+        <div className="min-h-screen flex items-center justify-center px-4">
+  <div className="w-full max-w-4xl grid md:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl">
 
-                <label className="label">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  className="input"
-                  placeholder="Email"
-                  required
-                />
+    {/* Left Side – Branding */}
+    <div className="hidden md:flex flex-col justify-center items-center bg-linear-to-br from-red-500 via-red-600 to-rose-600 p-10 text-white">
+      <h2 className="text-4xl font-bold mb-4">Become a Donor</h2>
+      <p className="text-white/90 text-center leading-relaxed">
+        Your blood donation can save lives.  
+        Join our trusted donor community today.
+      </p>
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/2966/2966484.png"
+        alt="donor"
+        className="w-40 mt-8 opacity-90"
+      />
+    </div>
 
-                <fieldset className="fieldset">
-                  <legend className="label">select a Photo</legend>
-                  <input type="file" className="file-input" name="photo" />
-                </fieldset>
+    {/* Right Side – Form */}
+    <div className="bg-white p-8 md:p-10">
+      <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+        Create Account
+      </h3>
 
-                {/* Blood */}
-                <fieldset className="fieldset">
-                  <legend className="label">Blood Group</legend>
-                  <select value={bloodGroup} 
-                  onChange={(e)=>setBloodGroup(e.target.value)}
-                  className="select"
-                  required
-                  >
-                    <option value="">Select a Blood Group</option>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                  </select>
-                </fieldset>
+      <form onSubmit={handleRegister} className="space-y-4">
 
-                {/* Districts */}
-                <fieldset className="fieldset">
-                  <legend className="label">District</legend>
-                  <select  
-                  className="select"
-                  value={district} 
-                  onChange={(e)=>setDistrict(e.target.value)}
-                  required
-                  >
-                    <option value="">Select a District</option>
-                    {
-                      districts.map(dist=>{
+        {/* Name */}
+        <div>
+          <label className="label">Name</label>
+          <input
+            type="text"
+            name="name"
+            className="input input-bordered w-full"
+            placeholder="Your name"
+            required
+          />
+        </div>
 
-                        return(
-                          <option key={dist.id} value={dist.name}>{dist.name}</option>
-                        );
-                      })
-                    }
-                  </select>
-                </fieldset>
+        {/* Email */}
+        <div>
+          <label className="label">Email</label>
+          <input
+            type="email"
+            name="email"
+            className="input input-bordered w-full"
+            placeholder="Your email"
+            required
+          />
+        </div>
 
-                {/* Upazillas */}
-                <fieldset className="fieldset">
-                  <legend className="label">Upazila</legend>
-                  <select  
-                  className="select"
-                  value={upazila}
-                  onChange={(e)=>setUpazila(e.target.value)}
-                  required
-                  >
-                    <option value="">Select a Upazila</option>
-                    {
-                      upazilas.map(upazil=>{
-                        return(
-                          <option 
-                          key={upazil.id}
-                           value={upazil.name}
-                          >
-                            {upazil.name}
+        {/* Photo */}
+        <div>
+          <label className="label">Profile Photo</label>
+          <input type="file" className="file-input file-input-bordered w-full" name="photo" />
+        </div>
 
-                          </option>
-                        )
-                        
-                      })
-                    }
-                    
-                  </select>
-                </fieldset>
+        {/* Blood Group */}
+        <div>
+          <label className="label">Blood Group</label>
+          <select
+            value={bloodGroup}
+            onChange={(e) => setBloodGroup(e.target.value)}
+            className="select select-bordered w-full"
+            required
+          >
+            <option value="">Select Blood Group</option>
+            {["A+","A-","B+","B-","AB+","AB-","O+","O-"].map(bg => (
+              <option key={bg}>{bg}</option>
+            ))}
+          </select>
+        </div>
 
-                <label className="label">Password</label>
-                <div className="relative">
-                  <input
-                    type={showPass ? "text" : "password"}
-                    name="password"
-                    className="input"
-                    placeholder="Password"
-                    required
-                  />
-                  <p
-                    onClick={() => {
-                      setShowPass(!showPass);
-                    }}
-                    className="absolute right-6 top-4 "
-                  >
-                    {showPass ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
-                  </p>
-                </div>
+        {/* District */}
+        <div>
+          <label className="label">District</label>
+          <select
+            className="select select-bordered w-full"
+            value={district}
+            onChange={(e) => setDistrict(e.target.value)}
+            required
+          >
+            <option value="">Select District</option>
+            {districts.map(dist => (
+              <option key={dist.id} value={dist.name}>
+                {dist.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
-                <label className="label">Confirm Password</label>
-                <div className="relative">
-                  <input
-                    type={showConfirmPass ? "text" : "password"}
-                    name="confirmPassword"
-                    className="input"
-                    placeholder="Confirm Password"
-                    required
-                  />
-                  <p
-                    onClick={() => {
-                      setShowConfirmPass(!showConfirmPass);
-                    }}
-                    className="absolute right-6 top-4 "
-                  >
-                    {showConfirmPass ? <FaEyeSlash></FaEyeSlash> : <FaEye />}
-                  </p>
-                </div>
+        {/* Upazila */}
+        <div>
+          <label className="label">Upazila</label>
+          <select
+            className="select select-bordered w-full"
+            value={upazila}
+            onChange={(e) => setUpazila(e.target.value)}
+            required
+          >
+            <option value="">Select Upazila</option>
+            {upazilas.map(up => (
+              <option key={up.id} value={up.name}>
+                {up.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
-                <div>
-                  <a className="label link link-hover">Forgot password?</a>
-                </div>
-                <button className="btn mt-4">Register</button>
-              </fieldset>
-            </form>
-            <div className="flex justify-around items-center">
-              <p className="label font-bold">Have an account login!</p>
-              <NavLink className="btn" to="/login">
-                Login
-              </NavLink>
-            </div>
+        {/* Password */}
+        <div>
+          <label className="label">Password</label>
+          <div className="relative">
+            <input
+              type={showPass ? "text" : "password"}
+              name="password"
+              className="input input-bordered w-full pr-12"
+              placeholder="Password"
+              required
+            />
+            <span
+              onClick={() => setShowPass(!showPass)}
+              className="absolute right-4 top-3 cursor-pointer text-gray-500"
+            >
+              {showPass ? <FaEyeSlash /> : <FaEye />}
+            </span>
           </div>
         </div>
+
+        {/* Confirm Password */}
+        <div>
+          <label className="label">Confirm Password</label>
+          <div className="relative">
+            <input
+              type={showConfirmPass ? "text" : "password"}
+              name="confirmPassword"
+              className="input input-bordered w-full pr-12"
+              placeholder="Confirm password"
+              required
+            />
+            <span
+              onClick={() => setShowConfirmPass(!showConfirmPass)}
+              className="absolute right-4 top-3 cursor-pointer text-gray-500"
+            >
+              {showConfirmPass ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+        </div>
+
+        {/* Submit */}
+        <button className="btn w-full bg-linear-to-br from-red-200 via-red-500 to-rose-600 text-white hover:opacity-90 mt-4">
+          Register
+        </button>
+      </form>
+
+      {/* Footer */}
+      <div className="text-center mt-6">
+        <p className="text-sm text-gray-600">
+          Already have an account?
+        </p>
+        <NavLink to="/login" className="text-red-500 font-semibold hover:underline">
+          Login here
+        </NavLink>
+      </div>
+    </div>
+  </div>
+</div>
+
       </div>
     </div>
   );

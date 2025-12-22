@@ -9,19 +9,13 @@ const Navbar = () => {
     <>
       
       <li>
-        <NavLink to="/bloodRequests">Blood Requests</NavLink>
-      </li>
-      <li>
         <NavLink to="/search">Search</NavLink>
       </li>
-      <li>
-        <NavLink to="/funding">Funding</NavLink>
-      </li>
-      {
-        user && <li>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-      </li>
-      }
+      {user && (
+                <li>
+                  <NavLink className={({isActive})=>isActive?'text-red-500':'font-semibold'} to="/funding">Funding</NavLink>
+                </li>
+              )}
     </>
   );
 
@@ -74,10 +68,56 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
+        <ul className="menu menu-horizontal px-1">
+          <li>
+        <NavLink className={({isActive})=>isActive?'text-red-500':'font-semibold'} to="/bloodRequests">Blood Requests</NavLink>
+      </li>
+      {user && (
+                <li>
+                  <NavLink className={({isActive})=>isActive?'text-red-500':'font-semibold'} to="/funding">Funding</NavLink>
+                </li>
+              )}
+        </ul>
       </div>
-      <div className="navbar-end">
+      {/* <div className="navbar-end"> */}
+      <div className="navbar-end mr-5">
         {user ? (
+          <div className="dropdown relative">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn-ghost cursor-pointer"
+            >
+              <img
+                src={user.photoURL}
+                className="w-14 h-14 rounded-2xl"
+                alt=""
+              />
+            </div>
+            <ul
+              tabIndex="-1"
+              className="absolute right-2 menu menu-sm dropdown-content bg-[#ffe0d2] opacity-80 text-right rounded-box z-1 mt-3 w-52 p-2 shadow"
+            >
+              {user && (
+                <li>
+                  <NavLink className={({isActive})=>isActive?'text-red-500':'font-semibold'} to="/dashboard">Dashboard</NavLink>
+                </li>
+              )}
+              
+              <li className="font-semibold">
+                <button onClick={handleLogOut}>LogOut</button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <NavLink to="/login" className="btn bg-linear-to-br from-red-200 via-red-500 to-rose-600 text-white">
+            Login
+          </NavLink>
+        )}
+      </div>
+    </div>
+
+    /* {user ? (
           <button className="btn" onClick={handleLogOut}>
             LogOut
           </button>
@@ -85,9 +125,7 @@ const Navbar = () => {
           <NavLink className="btn" to="/login">
             Login
           </NavLink>
-        )}
-      </div>
-    </div>
+        )} */
   );
 };
 
