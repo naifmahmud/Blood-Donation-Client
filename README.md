@@ -1,4 +1,4 @@
-**🩸 Blood Donation Platform**
+**🩸 BloodBankBD**
 
 **📌 Project Overview**
 
