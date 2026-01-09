@@ -1,38 +1,38 @@
-🩸 Blood Donation Platform
-📌 Project Overview
+**🩸 Blood Donation Platform**
+
+**📌 Project Overview**
 
 The Blood Donation Platform is a full-stack web application designed to simplify and streamline the process of blood donation. It connects donors with recipients while offering role-based dashboards to ensure efficient management by admins and volunteers.
 
 The platform promotes social responsibility by making blood donation requests more accessible, organized, and transparent.
 
-🚀 Core Features
-🔐 User Authentication
+**🚀 Core Features**
+
+**🔐 User Authentication**
 
 Secure login and registration using Firebase
 
 Role-based access for users, volunteers, and admins
 
-🩺 Donation Request Management
+**🩺 Donation Request Management**
 
 Users can create and manage blood donation requests
 
 Requests are stored and managed in a MongoDB database
 
-🧑‍💼 Role-Based Dashboards
-
+**🧑‍💼 Role-Based Dashboards**
 Admin Dashboard: Full control over users and donation requests
 
 Volunteer Dashboard: Assist in managing and coordinating donation activities
 
 User Dashboard: Track personal donation requests and activity
 
-🌐 Live Demo
+**🌐 Live Demo**
 
-🔗 Live Site:
-👉 https://bd-blood-bank.netlify.app/
+**🔗 Live Site:👉** https://bd-blood-bank.netlify.app/
 
-🛠️ Technologies & Skills Used
-Frontend
+**🛠️ Technologies & Skills Used
+Frontend**
 
 React
 
@@ -50,7 +50,7 @@ MongoDB
 
 Firebase
 
-🎯 Project Goal
+**🎯 Project Goal**
 
 This project aims to:
 
